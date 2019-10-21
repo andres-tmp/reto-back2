@@ -1,0 +1,9 @@
+com\andres\customermicro\data\KpiClientes.class
+com\andres\customermicro\CustomerApplication.class
+com\andres\customermicro\domain\Cliente.class
+com\andres\customermicro\service\ClienteService.class
+com\andres\customermicro\dto\ClienteCreateRequest.class
+com\andres\customermicro\util\StandartDeviationUtil.class
+com\andres\customermicro\controller\ClienteCtrl.class
+com\andres\customermicro\repository\ClienteRepository.class
+com\andres\customermicro\config\SwaggerConfig.class

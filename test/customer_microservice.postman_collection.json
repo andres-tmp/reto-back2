@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "87d26fac-01a0-449d-9c8f-9b92e8a81085",
+		"name": "customer_microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "0_clear-db",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "86d2d076-9afa-4985-9974-def186d208a6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/clear",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"clear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1_create-first-customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d90237d4-e72a-4193-ad41-17f5b98402a5",
+						"exec": [
+							"pm.test(\"Reponse time is less than 2000ms\", function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"})",
+							"",
+							"pm.test(\"Success full POST request\", function(){",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"})",
+							"",
+							"",
+							"pm.test(\"Object have an id\", function(){",
+							"    pm.expect(pm.response.text()).to.include(\"id\");",
+							"})",
+							"",
+							"",
+							"pm.test(\"Check firstName\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.nombre).to.eql(\"JOSE\");",
+							"});",
+							"",
+							"pm.test(\"Check lastName\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.apellido).to.eql(\"SOTO\");",
+							"});",
+							"",
+							"pm.test(\"Check birthday\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.fechaNacimiento).to.eql(\"1989-09-30\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\" : \"JOSE\",\n\t\"apellido\" : \"SOTO\",\n\t\"fechaNacimiento\" : \"1989-09-30\",\n\t\"edad\" : 30\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/creacliente",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"creacliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2_create-second-customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "41338e17-842f-42a1-87c8-22f6bdc7a93c",
+						"exec": [
+							"pm.test(\"Success full POST request\", function(){",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"})",
+							"",
+							"pm.test(\"Reponse time is less than 2000ms\", function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"})",
+							"",
+							"pm.test(\"Object have an id\", function(){",
+							"    pm.expect(pm.response.text()).to.include(\"id\");",
+							"})",
+							"",
+							"",
+							"pm.test(\"Check firstName\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.nombre).to.eql(\"LARRY\");",
+							"});",
+							"",
+							"pm.test(\"Check lastName\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.apellido).to.eql(\"PAGE\");",
+							"});",
+							"",
+							"pm.test(\"Check birthday\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.fechaNacimiento).to.eql(\"1979-09-30\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\" : \"LARRY\",\n\t\"apellido\" : \"PAGE\",\n\t\"fechaNacimiento\" : \"1979-09-30\",\n\t\"edad\" : 40\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/creacliente",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"creacliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3_list-customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ced1ee56-e804-4fb6-b0da-a60219345af5",
+						"exec": [
+							"pm.test(\"Reponse time is less than 2000ms\", function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"})",
+							"",
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/listclientes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"listclientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4_kpi-customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aebd5174-8857-45fc-836c-4b4122862c12",
+						"exec": [
+							"pm.test(\"Reponse time is less than 2000ms\", function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"})",
+							"",
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test(\"Check age average value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.promedioEdad).to.eql(35);",
+							"});",
+							"",
+							"pm.test(\"Check age sd value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.desviacionEstandarEdad).to.eql(5.0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/kpideclientes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"kpideclientes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
