@@ -2,7 +2,7 @@ server:
   port: 8080
 
 db:
-  ip: localhost
+  ip: 34.68.62.196
   schema: clientes_db
 
 spring:
@@ -12,7 +12,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${db.ip}/${db.schema}?zeroDateTimeBehavior=convertToNull&serverTimezone=GMT-5
     username: root
-    #password: telequipmysql
-    password: securePanther-159
+    password: --854512--
     testWhileIdle: true
     validationQuery: SELECT 1
