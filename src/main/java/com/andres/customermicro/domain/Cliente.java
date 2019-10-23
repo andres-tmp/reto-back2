@@ -14,7 +14,17 @@ import java.time.Period;
 @Table(name = "clientes")
 public class Cliente {
 
+    public Cliente(){
+    }
+
+    public Cliente(String nombre, String apellido, LocalDate fechaNacimiento){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @NotNull

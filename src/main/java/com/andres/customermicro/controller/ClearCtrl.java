@@ -1,6 +1,6 @@
 package com.andres.customermicro.controller;
 
-import com.andres.customermicro.repository.ClienteRepository;
+import com.andres.customermicro.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClearCtrl {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
 
     @PostMapping("/clear")
-    public void clear(){
-        clienteRepository.findAll().forEach( cliente -> clienteRepository.deleteById(cliente.getId()));
+    public void clear() {
+        clienteService.findAll().forEach(cliente -> clienteService.deleteById(cliente.getId()));
     }
 }

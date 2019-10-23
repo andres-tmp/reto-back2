@@ -11,6 +11,6 @@ import lombok.Setter;
 public class KpiClientes {
 
     Double promedioEdad;
-    double desviacionEstandarEdad;
+    Double desviacionEstandarEdad;
 
 }

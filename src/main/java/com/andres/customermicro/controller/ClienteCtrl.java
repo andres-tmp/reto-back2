@@ -25,13 +25,13 @@ public class ClienteCtrl {
 
     @ApiOperation(value = "Devuelva la lista de clientes registrados")
     @GetMapping("/listclientes")
-    public List<Cliente> findAll(){
+    public List<Cliente> findAll() {
         return clienteService.findAll();
     }
 
     @ApiOperation(value = "Devuelva indicadores de los clientes registrados")
     @GetMapping("/kpideclientes")
-    public KpiClientes kpiClientes(){
+    public KpiClientes kpiClientes() {
         return clienteService.kpiClientes();
     }
 
@@ -43,8 +43,8 @@ public class ClienteCtrl {
     })
     @PostMapping("/creacliente")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Cliente create( @ApiParam(value = "Datos del cliente", required = true) @Valid @RequestBody ClienteCreateRequest request){
-        return  clienteService.create(request);
+    public Cliente create(@ApiParam(value = "Datos del cliente", required = true) @Valid @RequestBody ClienteCreateRequest request) {
+        return clienteService.create(request);
     }
 
 

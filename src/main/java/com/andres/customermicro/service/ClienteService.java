@@ -8,6 +8,7 @@ import com.andres.customermicro.util.StandartDeviationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.DoubleStream;
 
@@ -17,14 +18,15 @@ public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
-    public KpiClientes kpiClientes(){
-        Double promedioEdad = findAll()
-                .stream()
+    public KpiClientes kpiClientes() {
+        List<Cliente> clientesList = findAll();
+        if (clientesList.isEmpty()) return new KpiClientes(0.0, 0.0);
+
+        Double promedioEdad = clientesList.stream()
                 .mapToInt(Cliente::getEdad)
                 .average().orElse(0);
 
-        DoubleStream ageStream = findAll()
-                .stream()
+        DoubleStream ageStream = clientesList.stream()
                 .mapToDouble(Cliente::getEdad);
 
         double sd = StandartDeviationUtil.standardDeviation(ageStream.toArray());
@@ -32,14 +34,18 @@ public class ClienteService {
         return new KpiClientes(promedioEdad, sd);
     }
 
-    public List<Cliente> findAll(){
-        return clienteRepository.findAll();
+    public List<Cliente> findAll() {
+        List<Cliente> list = new ArrayList<>();
+        clienteRepository.findAll().forEach(list::add);
+        return list;
     }
 
-    public Cliente create(ClienteCreateRequest cliente){
+    public Cliente create(ClienteCreateRequest cliente) {
         return clienteRepository.save(cliente.toEntity());
     }
 
 
-
+    public void deleteById(int id) {
+        clienteRepository.deleteById(id);
+    }
 }
