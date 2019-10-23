@@ -12,7 +12,6 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh "whoami"
                 echo "-=- compiling project -=-"
                 sh "./mvnw clean compile"
             }
@@ -20,6 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh "./mvnw test"
             }
         }
 
